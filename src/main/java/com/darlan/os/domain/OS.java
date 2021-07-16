@@ -1,6 +1,7 @@
 package com.darlan.os.domain;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,9 +38,11 @@ public class OS {
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 
+	public ZoneId zid = ZoneId.of("America/Sao_Paulo"); 
 	public OS() {
 		super();
-		this.setDataAbertura(LocalDateTime.now());
+		
+		this.setDataAbertura(LocalDateTime.now(this.zid));
 		this.setPrioridade(Prioridade.BAIXA);
 		this.setStatus(Status.ABERTO);
 	}
@@ -47,7 +50,7 @@ public class OS {
 	public OS(Integer id, Prioridade prioridade, String observacoes, Status status, Tecnico tecnico, Cliente cliente) {
 		super();
 		this.id = id;
-		this.setDataAbertura(LocalDateTime.now());
+		this.setDataAbertura(LocalDateTime.now(this.zid));
 		this.prioridade = (prioridade == null) ? 0 : prioridade.getCod();
 		this.observacoes = observacoes;
 		this.status = (status == null) ? 0 : status.getCod();

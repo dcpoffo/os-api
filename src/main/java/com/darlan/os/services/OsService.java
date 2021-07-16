@@ -1,6 +1,7 @@
 package com.darlan.os.services;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,7 +64,8 @@ public class OsService {
 		newObj.setCliente(cli);
 		
 		if (newObj.getStatus().getCod().equals(2)) {
-			newObj.setDataFechamento(LocalDateTime.now());
+			ZoneId zid = ZoneId.of("America/Sao_Paulo"); 
+			newObj.setDataFechamento(LocalDateTime.now(zid));
 		}
 		
 		return repository.save(newObj);		
